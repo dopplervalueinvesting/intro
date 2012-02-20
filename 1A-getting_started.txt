@@ -1,0 +1,40 @@
+SUMMARY
+1. Install the development environment.
+2. Update the package directory.
+3. Install and set up Git.
+4. Install Geany.
+5. Set up guest additions to allow you to share files between the host and guest OS.
+
+INSTALLING THE DEVELOPMENT ENVIRONMENT (FYI)
+*  I develop and use the Doppler Value Investing Calculator in Linux Mint Debian Edition (LMDE) within VirtualBox.  That is the setup I'm gearing these instructions for.  However, my way is far from the only way available.
+*  Using VirtualBox isn't necessary, but my experience working on Swift Linux and learning Ruby on Rails has made me a big fan of VirtualBox.
+*  My instructions on setting up the Doppler Value Investing Calculator should work just as well in other Debian-based distros.  If you need a distro lighter and faster than LMDE, I recommend antiX Linux.  Ubuntu-based distros should also work, but they are much heavier and slower than LMDE.
+*  All of the software that I use for the Doppler Value Investing Calculator (Python, Geany, and Git) is available for Mac and Windows.  However, I don't have a Mac, I no longer use Windows at home, and I have never used Python or Git in a Windows environment.
+*  Another solution if you're using Mac or Windows but wish to learn Linux is to set up Linux in VirtualBox.  Your Linux installation will be just another program and set of files in your regular computing environment.
+
+UPDATING THE PACKAGE DIRECTORY (FOR LINUX USERS)
+1. Some of the information in the package directory will be outdated, and you need to update it. As root, enter "apt-get update" to update the package directory.
+2. After the package directory has been filled, power down VirtualBox and take a snapshot.
+
+INSTALL AND SET UP GIT (REQUIRED)
+1. Follow the instructions at http://help.github.com/linux-set-up-git/ .
+2. Enter the command "mkdir ~/doppler". This is the directory where all Git repositories will be held.
+3. Power down VirtualBox and take a snapshot.
+
+INSTALL AND SET UP GEANY (REQUIRED FOR DEVELOPMENT)
+1. As root, enter "apt-get install geany" to download and install the Geany editor.  This installs Geany, which highlights many important parts ot the source code that the default Gedit does not.
+2. Power down VirtualBox and take a snapshot.
+
+SET UP GUEST ADDITIONS (OPTIONAL)
+1. In the guest OS, go to the VirtualBox bar. Go to Devices -> Guest Additions. This mounts the guest additions to the virtual CD drive.
+2. You'll be asked whether you wish to automatically run the VBOXADDITIONS software. Select OK to run it. This runs the guest additions.
+2A. ALTERNATE METHOD to run the guest additions: Open the Nautilus file manager. (You can do this by clicking on the "Computer" or "Home" icons on the desktop.) Click on the "Open Autorun Prompt" button to run the guest additions.
+2B. ANOTHER METHOD to run the guest additions: From the command line, become root and enter the commands "cd /media/VBOX*" and "sh VBoxLinuxAdditions.run".)
+3. As root in the guest OS, enter "mkdir /mnt/host".
+4. From the guest OS, go to Devices -> Shared Folders and select the /home/(host username)/guest directory on your host OS. Select "Make Permanent" option but NOT the auto-mount option.
+5. As root in the guest OS, enter the following commands:
+mkdir /mnt/host
+mount -t vboxsf guest /mnt/host
+6. Now the /mnt/host directory in the guest OS is mirrored by the /home/(host OS username)/share directory in the host OS. If you add a test file to the /home/(host OS username)/share directory in the host OS, it should be available in the /mnt/host directory in the guest OS. (You may need to reload Nautilus to see it.)
+7. PLEASE NOTE: The file sharing capability is NOT automatic. Each time you boot up the guest OS, you'll have to become root in the guest OS and enter "mount -t vboxsf guest /mnt/host" in order to resume sharing files between the guest and host OS.
+8. Power down VirtualBox and take a snapshot.
